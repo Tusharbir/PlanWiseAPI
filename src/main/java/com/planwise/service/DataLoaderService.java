@@ -24,7 +24,7 @@ public class DataLoaderService {
             String headerLine = br.readLine(); // Read and skip header
             System.out.println("CSV Header: " + headerLine);
 
-            String line;
+            String line; //row
             int lineCount = 0;
             int successCount = 0;
 
