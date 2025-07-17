@@ -18,7 +18,7 @@ public class DataLoaderService {
 
     @EventListener(ApplicationReadyEvent.class)
     public void loadCsvOnStart() {
-        String filePath = "src/main/resources/crawled_data/merged-csv.csv";
+        String filePath = "src/main/resources/merged-csv.csv";
 
         try (BufferedReader br = Files.newBufferedReader(Paths.get(filePath))) {
             String headerLine = br.readLine(); // Read and skip header
@@ -56,24 +56,26 @@ public class DataLoaderService {
                     String planLink = fields[11].trim();
 
                     // Skip if company or plan name is empty
-                    if (company.isEmpty() || planName.isEmpty()) {
-                        System.out.println("Skipping line " + lineCount + " - empty company or plan name");
-                        continue;
-                    }
+//                    if (company.isEmpty() || planName.isEmpty()) {
+//                        System.out.println("Skipping line " + lineCount + " - empty company or plan name");
+//                        continue;
+//                    }
 
                     // Create Plan object
-                    Plan plan = new Plan(
-                            company,        // site
-                            "",            // provider (empty as noted in your code)
-                            planName,      // planName
-                            technology,    // technology
-                            downloadSpeed, // downloadSpeed
-                            uploadSpeed,   // uploadSpeed
-                            price,         // price
-                            dataLimit,     // dataLimit
-                            "",            // totalMonthly (empty as noted)
-                            planLink       // planURL
-                    );
+//                    Plan plan = new Plan(
+//                            company,        // site
+//                            "",            // provider (empty as noted in your code)
+//                            planName,      // planName
+//                            technology,    // technology
+//                            downloadSpeed, // downloadSpeed
+//                            uploadSpeed,   // uploadSpeed
+//                            price,         // price
+//                            dataLimit,     // dataLimit
+//                            "",            // totalMonthly (empty as noted)
+//                            planLink       // planURL
+//                    );
+
+                   Plan plan = new Plan(company,"", planName, dataLimit, price, downloadSpeed, uploadSpeed,technology, features,description,pros,modemLink,planLink);
 
                     // Add to map with lowercase key for case-insensitive lookup
                     sitePlanMap.computeIfAbsent(company.toLowerCase(), k -> new ArrayList<>()).add(plan);

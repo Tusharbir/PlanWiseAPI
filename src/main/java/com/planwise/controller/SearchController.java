@@ -116,8 +116,12 @@ public class SearchController {
                                 contains(p.getUploadSpeed(), lower)   ||
                                 contains(p.getPrice(), lower)         ||
                                 contains(p.getDataLimit(), lower)     ||
-                                contains(p.getTotalMonthly(), lower)  ||
-                                contains(p.getPlanURL(), lower)
+                                contains(p.getPlanURL(), lower) ||
+                                contains(p.getFeatures(), lower) ||
+                                contains(p.getDescription(), lower) ||
+                                contains(p.getPros(), lower)||
+                                contains(p.getModemLinks(), lower)
+
                 )
                 .collect(Collectors.toList());
     }

@@ -5,29 +5,51 @@ public class Plan {
     private String site;
     private String provider;         // Leaving it blank for now
     private String planName;
-    private String technology;
+    private String dataLimit;
+    private String price;
     private String downloadSpeed;
     private String uploadSpeed;
-    private String price;
-    private String dataLimit;        // Using this in place of "contract"
-    private String totalMonthly;     // Currently unused / empty
+    private String technology;
+    private String features;
+    private String description;
+    private String pros;
+    private String modemLinks;
     private String planURL;
 
-    // Constructor (matches DataLoaderService)
-    public Plan(String site, String provider, String planName, String technology,
-                String downloadSpeed, String uploadSpeed, String price,
-                String dataLimit, String totalMonthly, String planURL) {
+    public Plan(String site, String provider, String planName, String dataLimit, String price, String downloadSpeed, String uploadSpeed, String technology, String features, String description, String pros, String modemLinks, String planURL) {
         this.site = site;
         this.provider = provider;
         this.planName = planName;
-        this.technology = technology;
+        this.dataLimit = dataLimit;
+        this.price = price;
         this.downloadSpeed = downloadSpeed;
         this.uploadSpeed = uploadSpeed;
-        this.price = price;
-        this.dataLimit = dataLimit;
-        this.totalMonthly = totalMonthly;
+        this.technology = technology;
+        this.features = features;
+        this.description = description;
+        this.pros = pros;
+        this.modemLinks = modemLinks;
         this.planURL = planURL;
     }
+
+    // Constructor (matches DataLoaderService)
+//    public Plan(String site, String provider, String planName, String technology,
+//                String downloadSpeed, String uploadSpeed, String price,
+//                String dataLimit, String planURL, String features, String description, String pros, String modemLinks) {
+//        this.site = site;
+//        this.provider = provider;
+//        this.planName = planName;
+//        this.technology = technology;
+//        this.downloadSpeed = downloadSpeed;
+//        this.uploadSpeed = uploadSpeed;
+//        this.price = price;
+//        this.dataLimit = dataLimit;
+//        this.planURL = planURL;
+//        this.features = features;
+//        this.description = description;
+//        this.pros = pros;
+//        this.modemLinks = modemLinks;
+//    }
 
     // Getters (Spring Boot uses these for JSON serialization)
     public String getSite() {
@@ -62,14 +84,18 @@ public class Plan {
         return dataLimit;
     }
 
-    public String getTotalMonthly() {
-        return totalMonthly;
-    }
-
     public String getPlanURL() {
         return planURL;
     }
+    public String getFeatures() {return features;}
+
+    public String getDescription() {return description;}
+
+    public String getPros(){ return pros;}
+
+    public String getModemLinks(){ return modemLinks;}
 }
+
 
 //public class Plan {
 //    private String site;
