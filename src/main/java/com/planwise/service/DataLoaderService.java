@@ -9,6 +9,7 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 public class DataLoaderService {
@@ -154,5 +155,10 @@ public class DataLoaderService {
         Set<String> sites = sitePlanMap.keySet();
         System.out.println("Available sites: " + sites);
         return sites;
+    }
+    public List<Plan> getAllPlans() {
+        return sitePlanMap.values().stream()
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
     }
 }
