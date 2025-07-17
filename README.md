@@ -3,7 +3,7 @@
 **API Documentation**
 
 
-### . Full-Text Search
+### Full-Text Search
 
 * **URL**: `[GET /api/search?q={query}](http://localhost:8080/api/search?q=50)`
 * **Description**:
@@ -39,7 +39,7 @@
 
 ---
 
-### 4. Autocomplete
+### Autocomplete
 
 * **URL**: ` http://localhost:8080/api/autocomplete?prefix={prefix}&max={maxCount}`
 * **Description**:
