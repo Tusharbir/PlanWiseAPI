@@ -1,4 +1,4 @@
-package com.planwise.featurecode;
+package com.planwise.autocomplete;
 
 import java.util.*;
 

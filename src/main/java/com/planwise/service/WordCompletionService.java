@@ -1,11 +1,10 @@
 package com.planwise.service;
 
-import com.planwise.featurecode.AVLTree;
-import com.planwise.featurecode.Extractor;
+import com.planwise.autocomplete.AVLTree;
+import com.planwise.autocomplete.Extractor;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
