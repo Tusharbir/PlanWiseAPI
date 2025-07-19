@@ -31,9 +31,9 @@
       "planName": "Internet 30 Unlimited",
       "features": "… video streaming and video-calling …",
       "description": "… video streaming …",
-      …
+  
     },
-    …
+  
   ]
   ```
 
@@ -90,9 +90,9 @@ Returns up to `maxCount` suggested corrections for the input `word`, based on a 
 **Example Request**  
 ```http
 GET http://localhost:8080/api/spellcheck?word=strem&max=5
-
-Example Response
-
+```
+**Example Response**
+```
 [
   "stream",
   "strem",
@@ -100,11 +100,11 @@ Example Response
   "stress",
   "steam"
 ]
-
+```
 Notes
 	•	Vocabulary is extracted from all columns of merged-csv.csv at application startup.
 	•	Suggestions are case-insensitive and returned in lowercase.
-```
+
 
 > **All data** is loaded from **`merged-csv.csv`** in `src/main/resources` at application startup.
 
