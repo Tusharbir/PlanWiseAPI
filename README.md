@@ -71,5 +71,40 @@
 
 ---
 
+### 5. Spell-Check Suggestions
+
+**URL**  
+`GET /api/spellcheck?word={word}&max={maxCount}`
+
+**Description**  
+Returns up to `maxCount` suggested corrections for the input `word`, based on a Levenshtein-distance search over the entire CSV vocabulary loaded into a Trie.
+
+**Query Parameters**  
+- `word` _(required)_: term to check (e.g. `strem`).  
+- `max` _(optional)_: maximum number of suggestions to return (default `5`).
+
+**Behavior**  
+1. If `word` is null or blank → returns `[]`.  
+2. Otherwise, finds all tokens within edit-distance ≤ 2, sorts them by (distance ascending, then alphabetically), and returns the top `max`.
+
+**Example Request**  
+```http
+GET http://localhost:8080/api/spellcheck?word=strem&max=5
+
+Example Response
+
+[
+  "stream",
+  "strem",
+  "streem",
+  "stress",
+  "steam"
+]
+
+Notes
+	•	Vocabulary is extracted from all columns of merged-csv.csv at application startup.
+	•	Suggestions are case-insensitive and returned in lowercase.
+```
+
 > **All data** is loaded from **`merged-csv.csv`** in `src/main/resources` at application startup.
-> Any additional endpoints (e.g., plan‐detail, filtering) can follow this same pattern: clear URL, description, parameters, example request/response, and notes.
+
