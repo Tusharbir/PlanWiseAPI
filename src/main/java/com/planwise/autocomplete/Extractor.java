@@ -40,9 +40,13 @@ public class Extractor {
                         ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)",  // handles quoted commas
                         -1
                 );
+                for (int i = 0; i < columns.length; i++) {
+                    System.out.println(columns[i]);
+                }
 
                 for (String field : columns) {
                     if (field == null || field.isBlank()) continue;
+
 
                     // Extract alphanumeric tokens, length ≥ 2
                     Matcher matcher = Pattern.compile("\\b[a-z0-9]{2,}\\b")
@@ -66,13 +70,5 @@ public class Extractor {
      * Main method to test the vocabulary extraction from CSV.
      * Displays the top 20 most frequent words.
      */
-    public static void main(String[] args) {
-        String fileName = "merged-csv.csv"; // File must be located in src/main/resources
 
-        Map<String, Integer> vocab = Extractor.extractVocabulary(fileName);
-
-        vocab.entrySet().stream()
-                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                .forEach(e -> System.out.println(e.getKey() + ": " + e.getValue()));
-    }
 }
