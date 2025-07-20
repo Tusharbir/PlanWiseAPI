@@ -85,6 +85,10 @@ public Plan(String site, String provider, String planName, String dataLimit, Str
         return dataLimit;
     }
 
+    public String getFeatures() {
+        return features;
+    }
+
 //    public String getPlanURL() {
 //        return planURL;
 //    }
