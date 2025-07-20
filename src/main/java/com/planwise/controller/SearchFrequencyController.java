@@ -49,6 +49,7 @@ public class SearchFrequencyController {
     public Map<String, Object> count(@RequestParam String keyword) {
         String normalized = keyword.toLowerCase();
         List<Plan> allPlans = planService.getAllPlans();
+
         StringBuilder allText = new StringBuilder();
         for (Plan plan : allPlans) {
             allText.append(Optional.ofNullable(plan.getSite()).orElse("")).append(" ")
@@ -60,9 +61,12 @@ public class SearchFrequencyController {
                    .append(Optional.ofNullable(plan.getTechnology()).orElse("")).append(" ")
                    .append(Optional.ofNullable(plan.getFeatures()).orElse(" ")).append(" ");
         }
+
         String combined = allText.toString().toLowerCase();
         int occurrences = searchService.countOccurrences(combined, normalized);
+
         freqService.incrementFrequency(normalized);
+
         Map<String, Object> res = new HashMap<>();
         res.put("keyword", normalized);
         res.put("occurrences", occurrences);
@@ -72,6 +76,7 @@ public class SearchFrequencyController {
 
     @GetMapping("/rank")
     public List<Map<String, Object>> rankPlansByKeyword(@RequestParam String keyword) {
+        String normalized = keyword.toLowerCase();
         List<Plan> allPlans = planService.getAllPlans();
         List<Map<String, Object>> result = new ArrayList<>();
 
@@ -87,7 +92,7 @@ public class SearchFrequencyController {
               .append(Optional.ofNullable(plan.getFeatures()).orElse("")).append(" ");
 
             String text = sb.toString();
-            int score = BoyerMoore.countOccurrences(text, keyword);
+            int score = BoyerMoore.countOccurrences(text.toLowerCase(), normalized);
 
             if (score > 0) {
                 Map<String, Object> map = new HashMap<>();
@@ -96,6 +101,7 @@ public class SearchFrequencyController {
                 result.add(map);
             }
         }
+
         result.sort((a, b) -> ((Integer) b.get("score")).compareTo((Integer) a.get("score")));
         return result;
     }
