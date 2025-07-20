@@ -84,10 +84,14 @@ public class Plan {
         return dataLimit;
     }
 
+    public String getFeatures() {
+        return features;
+    }
+
 //    public String getPlanURL() {
 //        return planURL;
 //    }
-    public String getFeatures() {return features;}
+//    public String getFeatures() {return features;}
 //
 //    public String getDescription() {return description;}
 //

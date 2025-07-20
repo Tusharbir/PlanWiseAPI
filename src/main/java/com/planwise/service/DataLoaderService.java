@@ -8,7 +8,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,7 +49,6 @@ public class DataLoaderService {
                     String uploadSpeed = fields[5].trim();
                     String technology = fields[6].trim();
                     String features = fields[7].trim();
-
 
                     // Skip if company or plan name is empty
 //                    if (company.isEmpty() || planName.isEmpty()) {
