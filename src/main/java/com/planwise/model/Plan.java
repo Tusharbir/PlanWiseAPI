@@ -1,103 +1,74 @@
 package com.planwise.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "plans") // Table name in your MySQL
 public class Plan {
 
-    private String site;
-    private String provider;         // Leaving it blank for now
-    private String planName;
-    private String technology;
-    private String downloadSpeed;
-    private String uploadSpeed;
-    private String price;
-    private String dataLimit;        // Using this in place of "contract"
-    private String totalMonthly;     // Currently unused / empty
-    private String planURL;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    // Constructor (matches DataLoaderService)
-    public Plan(String site, String provider, String planName, String technology,
-                String downloadSpeed, String uploadSpeed, String price,
-                String dataLimit, String totalMonthly, String planURL) {
-        this.site = site;
-        this.provider = provider;
+    @Column(name = "company")
+    private String company;
+
+    @Column(name = "plan_name")
+    private String planName;
+
+    @Column(name = "data_limited")
+    private String dataLimited;
+
+    @Column(name = "price")
+    private String price;
+
+    @Column(name = "download_speed")
+    private String downloadSpeed;
+
+    @Column(name = "upload_speed")
+    private String uploadSpeed;
+
+    @Column(name = "technology")
+    private String technology;
+
+    @Column(name = "features")
+    private String features;
+
+    // --- Constructors ---
+    public Plan() {} // Required by JPA
+
+    public Plan(Integer id, String company, String planName, String dataLimited, String price,
+                String downloadSpeed, String uploadSpeed, String technology, String features) {
+        this.id = id;
+        this.company = company;
         this.planName = planName;
-        this.technology = technology;
+        this.dataLimited = dataLimited;
+        this.price = price;
         this.downloadSpeed = downloadSpeed;
         this.uploadSpeed = uploadSpeed;
-        this.price = price;
-        this.dataLimit = dataLimit;
-        this.totalMonthly = totalMonthly;
-        this.planURL = planURL;
+        this.technology = technology;
+        this.features = features;
     }
 
-    // Getters (Spring Boot uses these for JSON serialization)
-    public String getSite() {
-        return site;
-    }
+    // --- Getters ---
+    public Integer getId() { return id; }
+    public String getCompany() { return company; }
+    public String getPlanName() { return planName; }
+    public String getDataLimited() { return dataLimited; }
+    public String getPrice() { return price; }
+    public String getDownloadSpeed() { return downloadSpeed; }
+    public String getUploadSpeed() { return uploadSpeed; }
+    public String getTechnology() { return technology; }
+    public String getFeatures() { return features; }
 
-    public String getProvider() {
-        return provider;
-    }
-
-    public String getPlanName() {
-        return planName;
-    }
-
-    public String getTechnology() {
-        return technology;
-    }
-
-    public String getDownloadSpeed() {
-        return downloadSpeed;
-    }
-
-    public String getUploadSpeed() {
-        return uploadSpeed;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public String getDataLimit() {
-        return dataLimit;
-    }
-
-    public String getTotalMonthly() {
-        return totalMonthly;
-    }
-
-    public String getPlanURL() {
-        return planURL;
-    }
+    // --- Setters (Optional, for JPA) ---
+    public void setId(Integer id) { this.id = id; }
+    public void setCompany(String company) { this.company = company; }
+    public void setPlanName(String planName) { this.planName = planName; }
+    public void setDataLimited(String dataLimited) { this.dataLimited = dataLimited; }
+    public void setPrice(String price) { this.price = price; }
+    public void setDownloadSpeed(String downloadSpeed) { this.downloadSpeed = downloadSpeed; }
+    public void setUploadSpeed(String uploadSpeed) { this.uploadSpeed = uploadSpeed; }
+    public void setTechnology(String technology) { this.technology = technology; }
+    public void setFeatures(String features) { this.features = features; }
 }
-
-//public class Plan {
-//    private String site;
-//    private String planName;
-//    private String downloadSpeed;
-//    private String uploadSpeed;
-//    private String technology;
-//    private String price;
-//    private String planURL;
-//
-//    // Constructor
-//    public Plan(String site, String planName, String downloadSpeed, String uploadSpeed,
-//                String technology, String price, String planURL) {
-//        this.site = site;
-//        this.planName = planName;
-//        this.downloadSpeed = downloadSpeed;
-//        this.uploadSpeed = uploadSpeed;
-//        this.technology = technology;
-//        this.price = price;
-//        this.planURL = planURL;
-//    }
-//
-//    // Getters (Spring uses these to generate JSON)
-//    public String getSite() { return site; }
-//    public String getPlanName() { return planName; }
-//    public String getDownloadSpeed() { return downloadSpeed; }
-//    public String getUploadSpeed() { return uploadSpeed; }
-//    public String getTechnology() { return technology; }
-//    public String getPrice() { return price; }
-//    public String getPlanURL() { return planURL; }
-//}
