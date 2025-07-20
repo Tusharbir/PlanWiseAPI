@@ -35,7 +35,11 @@ public class DataLoaderService {
                     // Parse CSV line properly handling quoted fields
                     String[] fields = parseCSVLine(line);
 
-                    if (fields.length < 12) {
+//                    if (fields.length < 12) {
+//                        System.out.println("Skipping line " + lineCount + " - insufficient fields: " + fields.length);
+//                        continue;
+//                    }
+                    if (fields.length < 8) {
                         System.out.println("Skipping line " + lineCount + " - insufficient fields: " + fields.length);
                         continue;
                     }
@@ -50,10 +54,10 @@ public class DataLoaderService {
                     String uploadSpeed = fields[5].trim();
                     String technology = fields[6].trim();
                     String features = fields[7].trim();
-                    String description = fields[8].trim();
-                    String pros = fields[9].trim();
-                    String modemLink = fields[10].trim();
-                    String planLink = fields[11].trim();
+//                    String description = fields[8].trim();
+//                    String pros = fields[9].trim();
+//                    String modemLink = fields[10].trim();
+//                    String planLink = fields[11].trim();
 
                     // Skip if company or plan name is empty
 //                    if (company.isEmpty() || planName.isEmpty()) {
@@ -75,7 +79,8 @@ public class DataLoaderService {
 //                            planLink       // planURL
 //                    );
 
-                   Plan plan = new Plan(company,"", planName, dataLimit, price, downloadSpeed, uploadSpeed,technology, features,description,pros,modemLink,planLink);
+//                   Plan plan = new Plan(company,"", planName, dataLimit, price, downloadSpeed, uploadSpeed,technology, features,description,pros,modemLink,planLink);
+                    Plan plan = new Plan(company,"", planName, dataLimit, price, downloadSpeed, uploadSpeed,technology, features);
 
                     // Add to map with lowercase key for case-insensitive lookup
                     sitePlanMap.computeIfAbsent(company.toLowerCase(), k -> new ArrayList<>()).add(plan);
