@@ -11,12 +11,12 @@ public class Plan {
     private String uploadSpeed;
     private String technology;
     private String features;
-    private String description;
-    private String pros;
-    private String modemLinks;
-    private String planURL;
+//    private String description;
+//    private String pros;
+//    private String modemLinks;
+//    private String planURL;
 
-    public Plan(String site, String provider, String planName, String dataLimit, String price, String downloadSpeed, String uploadSpeed, String technology, String features, String description, String pros, String modemLinks, String planURL) {
+    public Plan(String site, String provider, String planName, String dataLimit, String price, String downloadSpeed, String uploadSpeed, String technology, String features) {
         this.site = site;
         this.provider = provider;
         this.planName = planName;
@@ -26,10 +26,10 @@ public class Plan {
         this.uploadSpeed = uploadSpeed;
         this.technology = technology;
         this.features = features;
-        this.description = description;
-        this.pros = pros;
-        this.modemLinks = modemLinks;
-        this.planURL = planURL;
+//        this.description = description;
+//        this.pros = pros;
+//        this.modemLinks = modemLinks;
+//        this.planURL = planURL;
     }
 
     // Constructor (matches DataLoaderService)
@@ -84,16 +84,16 @@ public class Plan {
         return dataLimit;
     }
 
-    public String getPlanURL() {
-        return planURL;
-    }
+//    public String getPlanURL() {
+//        return planURL;
+//    }
     public String getFeatures() {return features;}
-
-    public String getDescription() {return description;}
-
-    public String getPros(){ return pros;}
-
-    public String getModemLinks(){ return modemLinks;}
+//
+//    public String getDescription() {return description;}
+//
+//    public String getPros(){ return pros;}
+//
+//    public String getModemLinks(){ return modemLinks;}
 }
 
 
