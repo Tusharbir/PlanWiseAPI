@@ -107,6 +107,24 @@ public class SearchController {
         }
 
         // 2) Free-text search otherwise
+//        return dataLoaderService.getAllPlans().stream()
+//                .filter(p ->
+//                        contains(p.getSite(), lower)          ||
+//                                contains(p.getPlanName(), lower)      ||
+//                                contains(p.getTechnology(), lower)    ||
+//                                contains(p.getDownloadSpeed(), lower) ||
+//                                contains(p.getUploadSpeed(), lower)   ||
+//                                contains(p.getPrice(), lower)         ||
+//                                contains(p.getDataLimit(), lower)     ||
+//                                contains(p.getPlanURL(), lower) ||
+//                                contains(p.getFeatures(), lower) ||
+//                                contains(p.getDescription(), lower) ||
+//                                contains(p.getPros(), lower)||
+//                                contains(p.getModemLinks(), lower)
+//
+//                )
+//                .collect(Collectors.toList());
+
         return dataLoaderService.getAllPlans().stream()
                 .filter(p ->
                         contains(p.getSite(), lower)          ||
@@ -115,12 +133,7 @@ public class SearchController {
                                 contains(p.getDownloadSpeed(), lower) ||
                                 contains(p.getUploadSpeed(), lower)   ||
                                 contains(p.getPrice(), lower)         ||
-                                contains(p.getDataLimit(), lower)     ||
-                                contains(p.getPlanURL(), lower) ||
-                                contains(p.getFeatures(), lower) ||
-                                contains(p.getDescription(), lower) ||
-                                contains(p.getPros(), lower)||
-                                contains(p.getModemLinks(), lower)
+                                contains(p.getDataLimit(), lower)
 
                 )
                 .collect(Collectors.toList());
