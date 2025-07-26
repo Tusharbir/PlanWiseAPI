@@ -8,6 +8,8 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SearchFrequencyService {
@@ -73,5 +75,13 @@ public class SearchFrequencyService {
     public int getFrequency(String keyword) {
         SearchFrequency freq = freqMap.get(keyword.toLowerCase());
         return freq == null ? 0 : freq.getCount();
+    }
+
+    // New method: get top trending keywords by frequency descending, limited by 'limit'
+    public List<SearchFrequency> getTopTrending(int limit) {
+        return freqMap.values().stream()
+                .sorted((a, b) -> Integer.compare(b.getCount(), a.getCount()))
+                .limit(limit)
+                .collect(Collectors.toList());
     }
 }

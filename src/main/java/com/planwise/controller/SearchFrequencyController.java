@@ -1,6 +1,7 @@
 package com.planwise.controller;
 
 import com.planwise.model.Plan;
+import com.planwise.model.SearchFrequency;
 import com.planwise.service.PlanService;
 import com.planwise.service.SearchFrequencyService;
 import com.planwise.service.SearchService;
@@ -104,5 +105,12 @@ public class SearchFrequencyController {
 
         result.sort((a, b) -> ((Integer) b.get("score")).compareTo((Integer) a.get("score")));
         return result;
+    }
+
+    // New endpoint to get top trending search keywords
+    @GetMapping("/top")
+    public List<SearchFrequency> getTopTrending(@RequestParam(defaultValue = "5") int limit) {
+        List<SearchFrequency> topTrending = freqService.getTopTrending(limit);
+        return topTrending.isEmpty() ? Collections.emptyList() : topTrending;
     }
 }
