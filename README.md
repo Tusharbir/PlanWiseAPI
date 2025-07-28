@@ -108,3 +108,87 @@ Notes
 
 > **All data** is loaded from **`merged-csv.csv`** in `src/main/resources` at application startup.
 
+
+### 4. Website Crawler
+
+**URL:**
+`GET /api/crawler/crawl?url={url}`
+
+**Description:**
+Crawls the specified website and extracts phone numbers, email addresses, and internal links (within the same domain).
+
+---
+
+**Query Parameters:**
+
+| Name | Required | Type   | Description                                          |
+| ---- | -------- | ------ | ---------------------------------------------------- |
+| url  | yes      | string | The website URL to crawl (with or without `http://`) |
+
+---
+
+**Behavior:**
+
+* Crawls the root page and linked pages within the same domain.
+* Extracts:
+
+  * Valid email addresses
+  * Phone numbers in common formats
+  * Internal links (same base domain)
+* Ignores external or third-party links.
+* Returns an error message in the `error` field if crawling fails.
+
+---
+
+**Example Request:**
+
+```
+GET http://localhost:8080/api/crawler/crawl?url=goldengatecatering.com
+```
+
+---
+
+**Example Response (200 OK):**
+
+```json
+{
+  "url": "goldengatecatering.com",
+  "phoneNumbers": [
+    "+44 7518 965557"
+  ],
+  "emails": [
+    "catering@goldengatecatering.com"
+  ],
+  "links": [
+    "https://goldengatecatering.com/enquiry-form/",
+    "https://www.goldengatecatering.com/enquiry-form",
+    "https://goldengatecatering.com/",
+    "https://goldengatecatering.com/enquiry-form",
+    "https://goldengatecatering.com",
+    "https://goldengatecatering.com/#content",
+    "https://goldengatecatering.com/contact/",
+    "https://goldengatecatering.com/#"
+  ],
+  "error": null
+}
+```
+
+---
+
+**Example Response (Failure):**
+
+```json
+{
+  "url": "invalidsite.fake",
+  "phoneNumbers": [],
+  "emails": [],
+  "links": [],
+  "error": "Unable to connect to host: invalidsite.fake"
+}
+```
+
+---
+
+**Notes:**
+
+
