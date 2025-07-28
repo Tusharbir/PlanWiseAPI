@@ -112,7 +112,7 @@ Notes
 ### 4. Website Crawler
 
 **URL:**
-`GET /api/crawler/crawl?url={url}`
+`GET /api/crawl?url={url}`
 
 **Description:**
 Crawls the specified website and extracts phone numbers, email addresses, and internal links (within the same domain).
@@ -170,20 +170,6 @@ GET http://localhost:8080/api/crawler/crawl?url=goldengatecatering.com
     "https://goldengatecatering.com/#"
   ],
   "error": null
-}
-```
-
----
-
-**Example Response (Failure):**
-
-```json
-{
-  "url": "invalidsite.fake",
-  "phoneNumbers": [],
-  "emails": [],
-  "links": [],
-  "error": "Unable to connect to host: invalidsite.fake"
 }
 ```
 
