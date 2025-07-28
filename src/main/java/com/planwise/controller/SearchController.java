@@ -93,7 +93,7 @@ public class SearchController {
         if (raw.isEmpty()) {
             return Collections.emptyList();
         }
-        // Edge case: no alphanumeric chars
+//         Edge case: no alphanumeric chars
         if (!raw.matches(".*[A-Za-z0-9].*")) {
             return Collections.emptyList();
         }
@@ -106,24 +106,7 @@ public class SearchController {
             return dataLoaderService.getPlansBySite(lower);
         }
 
-        // 2) Free-text search otherwise
-//        return dataLoaderService.getAllPlans().stream()
-//                .filter(p ->
-//                        contains(p.getSite(), lower)          ||
-//                                contains(p.getPlanName(), lower)      ||
-//                                contains(p.getTechnology(), lower)    ||
-//                                contains(p.getDownloadSpeed(), lower) ||
-//                                contains(p.getUploadSpeed(), lower)   ||
-//                                contains(p.getPrice(), lower)         ||
-//                                contains(p.getDataLimit(), lower)     ||
-//                                contains(p.getPlanURL(), lower) ||
-//                                contains(p.getFeatures(), lower) ||
-//                                contains(p.getDescription(), lower) ||
-//                                contains(p.getPros(), lower)||
-//                                contains(p.getModemLinks(), lower)
-//
-//                )
-//                .collect(Collectors.toList());
+
 
         return dataLoaderService.getAllPlans().stream()
                 .filter(p ->

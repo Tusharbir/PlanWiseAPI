@@ -39,7 +39,7 @@ public class DataLoaderService {
                         continue;
                     }
 
-                    // Map CSV columns to fields based on your CSV structure:
+
                     // Company,Plan Name,Data Limited,Price,Download Speed,Upload Speed,Technology,Features,Description,Pros,Compatible Modems Link,Plan Link
                     String company = fields[0].trim();
                     String planName = fields[1].trim();
@@ -50,29 +50,9 @@ public class DataLoaderService {
                     String technology = fields[6].trim();
                     String features = fields[7].trim();
 
-                    // Skip if company or plan name is empty
-//                    if (company.isEmpty() || planName.isEmpty()) {
-//                        System.out.println("Skipping line " + lineCount + " - empty company or plan name");
-//                        continue;
-//                    }
-
-                    // Create Plan object
-//                    Plan plan = new Plan(
-//                            company,        // site
-//                            "",            // provider (empty as noted in your code)
-//                            planName,      // planName
-//                            technology,    // technology
-//                            downloadSpeed, // downloadSpeed
-//                            uploadSpeed,   // uploadSpeed
-//                            price,         // price
-//                            dataLimit,     // dataLimit
-//                            "",            // totalMonthly (empty as noted)
-//                            planLink       // planURL
-//                    );
-
                    Plan plan = new Plan(company,"", planName, dataLimit, price, downloadSpeed, uploadSpeed,technology, features);
 
-                    // Add to map with lowercase key for case-insensitive lookup
+
                     sitePlanMap.computeIfAbsent(company.toLowerCase(), k -> new ArrayList<>()).add(plan);
                     successCount++;
 
@@ -109,7 +89,7 @@ public class DataLoaderService {
             char c = line.charAt(i);
 
             if (c == '"') {
-                // Handle escaped quotes
+
                 if (i + 1 < line.length() && line.charAt(i + 1) == '"') {
                     currentField.append('"');
                     i++; // Skip the next quote
@@ -124,7 +104,7 @@ public class DataLoaderService {
             }
         }
 
-        // Add the last field
+
         fields.add(currentField.toString());
 
         return fields.toArray(new String[0]);
@@ -139,7 +119,7 @@ public class DataLoaderService {
         List<Plan> plans = sitePlanMap.getOrDefault(siteName.toLowerCase(), new ArrayList<>());
         System.out.println("Getting plans for site: '" + siteName + "' (found " + plans.size() + " plans)");
 
-        // Also try exact match if lowercase doesn't work
+
         if (plans.isEmpty()) {
             plans = sitePlanMap.getOrDefault(siteName, new ArrayList<>());
             System.out.println("Tried exact match for site: '" + siteName + "' (found " + plans.size() + " plans)");
