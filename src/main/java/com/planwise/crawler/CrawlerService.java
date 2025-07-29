@@ -19,51 +19,9 @@ public class CrawlerService {
 
     // Phone number patterns for different regions
     private final Pattern phonePattern = Pattern.compile(
-            "(?:\\+?1[-\\s]?)?" +                           // Optional +1 or 1 with separator
-                    "(?:\\([2-9]\\d{2}\\)|[2-9]\\d{2})[-\\s]?" +   // Area code (parentheses optional)
-                    "[2-9]\\d{2}[-\\s]?" +                         // Exchange code
-                    "\\d{4}" +                                     // Number
-                    "|" +                                          // OR
-                    "(?:\\+?44[-\\s]?)?" +                         // UK: +44
-                    "(?:\\(?0?[1-9]\\d{1,4}\\)?[-\\s]?)" +         // UK area code
-                    "\\d{6,8}" +                                   // UK number
-                    "|" +                                          // OR
-                    "(?:\\+?91[-\\s]?)?" +                         // India: +91
-                    "[6-9]\\d{9}" +                                // India mobile
-                    "|" +                                          // OR
-                    "(?:\\+?61[-\\s]?)?" +                         // Australia: +61
-                    "[2-478]\\d{8}" +                              // Australia number
-                    "|" +                                          // OR
-                    "(?:\\+?49[-\\s]?)?" +                         // Germany: +49
-                    "\\(?0?[1-9]\\d{1,4}\\)?[-\\s]?" +             // Germany area code
-                    "\\d{6,8}" +                                   // Germany number
-                    "|" +                                          // OR
-                    "(?:\\+?33[-\\s]?)?" +                         // France: +33
-                    "\\(?0?[1-9]\\d{8}\\)?" +                      // France number
-                    "|" +                                          // OR
-                    "(?:\\+?86[-\\s]?)?" +                         // China: +86
-                    "1[3-9]\\d{9}" +                               // China mobile
-                    "|" +                                          // OR
-                    "(?:\\+?81[-\\s]?)?" +                         // Japan: +81
-                    "\\(?0?[1-9]\\d{1,4}\\)?[-\\s]?" +             // Japan area code
-                    "\\d{6,8}" +                                   // Japan number
-                    "|" +                                          // OR
-                    "(?:\\+?7[-\\s]?)?" +                          // Russia: +7
-                    "[489]\\d{9}" +                                // Russia mobile
-                    "|" +                                          // OR
-                    "(?:\\+?52[-\\s]?)?" +                         // Mexico: +52
-                    "1?[2-9]\\d{9}" +                              // Mexico number
-                    "|" +                                          // OR
-                    "(?:\\+?55[-\\s]?)?" +                         // Brazil: +55
-                    "\\(?[1-9]{2}\\)?[-\\s]?" +                    // Brazil area code
-                    "[9]?\\d{8}" +                                 // Brazil number
-                    "|" +                                          // OR
-                    "(?:\\+?27[-\\s]?)?" +                         // South Africa: +27
-                    "[1-9]\\d{8}" +                                // South Africa number
-                    "|" +                                          // OR
-                    "(?:\\+?\\d{1,4}[-\\s]?)?" +                   // Generic international
-                    "\\(?\\d{1,4}\\)?[-\\s]?" +                    // Generic area code
-                    "\\d{6,10}",                                   // Generic number
+            "(?:\\+?\\d{1,4}[-\\s]?)?" +         // Optional country code
+                    "(?:\\(?\\d{2,5}\\)?[-\\s]?)?" +     // Optional area code (with or without brackets)
+                    "\\d{3,4}[-\\s]?\\d{3,4}",           // Main number part (can be split)
             Pattern.CASE_INSENSITIVE
     );
 
