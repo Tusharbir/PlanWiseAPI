@@ -6,7 +6,7 @@ import com.planwise.service.SearchFrequencyService;
 import java.util.*;
 
 /**
- * A custom-built autocomplete system using an AVL Tree.
+ * autocomplete system using an AVL Tree.
  * Stores words along with their frequency and suggests
  * completions based on prefix input.
  */
@@ -20,8 +20,9 @@ public class AVLTree {
     }
 
 
-
-    /** Inner class representing a node in the AVL Tree. */
+    /**
+     * Inner class representing a node in the AVL Tree.
+     */
     class Entry {
         String term;          // Word stored in the node
         int count;            // Frequency of the word
@@ -29,7 +30,9 @@ public class AVLTree {
         Entry leftLink;       // Left child
         Entry rightLink;      // Right child
 
-        /** Constructor to initialize a new tree node. */
+        /**
+         * Constructor to initialize a new tree node.
+         */
         Entry(String term, int count) {
             this.term = term;
             this.count = count;
@@ -39,12 +42,16 @@ public class AVLTree {
 
     private Entry top; // Root node of the AVL Tree
 
-    /** Inserts a word into the AVL Tree. */
+    /**
+     * Inserts a word into the AVL Tree.
+     */
     public void push(String term, int count) {
         top = place(top, term, count);
     }
 
-    /** Recursively inserts a word into the tree and rebalances it. */
+    /**
+     * Recursively inserts a word into the tree and rebalances it.
+     */
     private Entry place(Entry spot, String term, int count) {
         if (spot == null) return new Entry(term, count);
 
@@ -62,22 +69,32 @@ public class AVLTree {
         return balanceTree(spot, term);
     }
 
-    /** Updates the height of the node. */
-    private void updateDepth(Entry node) {
+    /**
+     * Updates the height of the node.
+     */
+    private void updateDepth(Entry node)
+    {
         node.depth = 1 + Math.max(depth(node.leftLink), depth(node.rightLink));
     }
 
-    /** Returns the height of a node. */
+    /**
+     * Returns the height of a node.
+     */
     private int depth(Entry node) {
+
         return (node == null) ? 0 : node.depth;
     }
 
-    /** Computes the balance factor of a node. */
+    /**
+     * Computes the balance factor of a node.
+     */
     private int difference(Entry node) {
         return (node == null) ? 0 : depth(node.leftLink) - depth(node.rightLink);
     }
 
-    /** Performs a right rotation. */
+    /**
+     * Performs a right rotation.
+     */
     private Entry rotateRight(Entry y) {
         Entry x = y.leftLink;
         Entry T2 = x.rightLink;
@@ -89,7 +106,9 @@ public class AVLTree {
         return x;
     }
 
-    /** Performs a left rotation. */
+    /**
+     * Performs a left rotation.
+     */
     private Entry rotateLeft(Entry x) {
         Entry y = x.rightLink;
         Entry T2 = y.leftLink;
@@ -101,17 +120,17 @@ public class AVLTree {
         return y;
     }
 
-    /** Balances the tree after insertion to maintain AVL property. */
+    /**
+     * Balances the tree after insertion to maintain AVL property.
+     */
     private Entry balanceTree(Entry node, String term) {
         int balance = difference(node);
 
         // Left heavy
-        if (balance > 1 && term.compareTo(node.leftLink.term) < 0)
-            return rotateRight(node);
+        if (balance > 1 && term.compareTo(node.leftLink.term) < 0) return rotateRight(node);
 
         // Right heavy
-        if (balance < -1 && term.compareTo(node.rightLink.term) > 0)
-            return rotateLeft(node);
+        if (balance < -1 && term.compareTo(node.rightLink.term) > 0) return rotateLeft(node);
 
         // Left-Right case
         if (balance > 1 && term.compareTo(node.leftLink.term) > 0) {
@@ -128,19 +147,23 @@ public class AVLTree {
         return node;
     }
 
-    /** Prints all stored words in alphabetical order. */
-    public void printTree() {
-        explore(top);
-    }
+    /**
+     * Prints all stored words in alphabetical order.
+     */
+//    public void printTree() {
+//        explore(top);
+//    }
 
-    /** Helper function to perform in-order traversal. */
-    private void explore(Entry node) {
-        if (node != null) {
-            explore(node.leftLink);
-            System.out.println(node.term + " (" + node.count + ")");
-            explore(node.rightLink);
-        }
-    }
+//    /**perform in-order traversal.
+
+//     */
+//    private void explore(Entry node) {
+//        if (node != null) {
+//            explore(node.leftLink);
+//            System.out.println(node.term + " (" + node.count + ")");
+//            explore(node.rightLink);
+//        }
+//    }
 
     /**
      * Returns a list of suggested words based on the input prefix.
@@ -196,36 +219,4 @@ public class AVLTree {
     }
 
 
-    /**
-     * Entry point to test the AVL-based autocomplete engine via console.
-     */
-//    public static void main(String[] args) {
-//        String file = "merged-csv.csv";
-//        Map<String, Integer> terms = Extractor.extractVocabulary(file);
-//
-//        AVLTree engine = new AVLTree();
-//        terms.forEach(engine::push);
-//
-//        System.out.println("AVL Tree (in alphabetic order):");
-//        engine.printTree();
-//
-//        Scanner input = new Scanner(System.in);
-//        System.out.println("\nEnter a word prefix (or 'exit' to stop):");
-//
-//        while (true) {
-//            System.out.print("Your prefix: ");
-//            String typed = input.nextLine().trim().toLowerCase();
-//            if (typed.equals("exit")) break;
-//
-//            List<String> found = engine.predict(typed, 5);
-//            if (found.isEmpty()) {
-//                System.out.println("No results.");
-//            } else {
-//                System.out.println("Suggestions:");
-//                found.forEach(s -> System.out.println("- " + s));
-//            }
-//        }
-//
-//        input.close();
-//    }
 }
