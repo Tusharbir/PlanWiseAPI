@@ -1,5 +1,8 @@
 package com.planwise.autocomplete;
 
+import com.planwise.model.AutoCompleteRsult;
+import com.planwise.service.SearchFrequencyService;
+
 import java.util.*;
 
 /**
@@ -8,6 +11,15 @@ import java.util.*;
  * completions based on prefix input.
  */
 public class AVLTree {
+
+    private SearchFrequencyService searchFreqService;
+
+    // Constructor to inject the service
+    public AVLTree(SearchFrequencyService searchFreqService) {
+        this.searchFreqService = searchFreqService;
+    }
+
+
 
     /** Inner class representing a node in the AVL Tree. */
     class Entry {
@@ -134,8 +146,8 @@ public class AVLTree {
      * Returns a list of suggested words based on the input prefix.
      * Modified to collect all terms that start with the prefix, up to maxCount.
      */
-    public List<String> predict(String prefix, int maxCount) {
-        List<String> results = new ArrayList<>();
+    public List<AutoCompleteRsult> predict(String prefix, int maxCount) {
+        List<AutoCompleteRsult> results = new ArrayList<>();
         collectMatches(top, prefix, results, maxCount);
         return results;
     }
@@ -144,7 +156,7 @@ public class AVLTree {
      * Traverses the tree to find matching words with the prefix.
      * Only descends into subtrees that can contain matching prefixes.
      */
-    private void collectMatches(Entry node, String prefix, List<String> results, int limit) {
+    private void collectMatches(Entry node, String prefix, List<AutoCompleteRsult> results, int limit) {
         if (node == null || results.size() >= limit) return;
 
         // If node.term could be in left subtree
@@ -153,8 +165,12 @@ public class AVLTree {
         }
 
         // Add if it matches
+//        if (node.term.startsWith(prefix)) {
+//            results.add(node.term);
+//        }
+
         if (node.term.startsWith(prefix)) {
-            results.add(node.term);
+            results.add(new AutoCompleteRsult(node.term, node.count,getSearchFrequency(node.term)));
         }
 
         // If node.term could be in right subtree
@@ -162,37 +178,44 @@ public class AVLTree {
             collectMatches(node.rightLink, prefix, results, limit);
         }
     }
+    private int getSearchFrequency(String term) {
+        if (searchFreqService == null) {
+            return 0; // Return 0 if service is not available
+        }
+        return searchFreqService.getFrequency(term);
+    }
+
 
     /**
      * Entry point to test the AVL-based autocomplete engine via console.
      */
-    public static void main(String[] args) {
-        String file = "merged-csv.csv";
-        Map<String, Integer> terms = Extractor.extractVocabulary(file);
-
-        AVLTree engine = new AVLTree();
-        terms.forEach(engine::push);
-
-        System.out.println("AVL Tree (in alphabetic order):");
-        engine.printTree();
-
-        Scanner input = new Scanner(System.in);
-        System.out.println("\nEnter a word prefix (or 'exit' to stop):");
-
-        while (true) {
-            System.out.print("Your prefix: ");
-            String typed = input.nextLine().trim().toLowerCase();
-            if (typed.equals("exit")) break;
-
-            List<String> found = engine.predict(typed, 5);
-            if (found.isEmpty()) {
-                System.out.println("No results.");
-            } else {
-                System.out.println("Suggestions:");
-                found.forEach(s -> System.out.println("- " + s));
-            }
-        }
-
-        input.close();
-    }
+//    public static void main(String[] args) {
+//        String file = "merged-csv.csv";
+//        Map<String, Integer> terms = Extractor.extractVocabulary(file);
+//
+//        AVLTree engine = new AVLTree();
+//        terms.forEach(engine::push);
+//
+//        System.out.println("AVL Tree (in alphabetic order):");
+//        engine.printTree();
+//
+//        Scanner input = new Scanner(System.in);
+//        System.out.println("\nEnter a word prefix (or 'exit' to stop):");
+//
+//        while (true) {
+//            System.out.print("Your prefix: ");
+//            String typed = input.nextLine().trim().toLowerCase();
+//            if (typed.equals("exit")) break;
+//
+//            List<String> found = engine.predict(typed, 5);
+//            if (found.isEmpty()) {
+//                System.out.println("No results.");
+//            } else {
+//                System.out.println("Suggestions:");
+//                found.forEach(s -> System.out.println("- " + s));
+//            }
+//        }
+//
+//        input.close();
+//    }
 }

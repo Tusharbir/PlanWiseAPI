@@ -1,5 +1,6 @@
 package com.planwise.controller;
 
+import com.planwise.model.AutoCompleteRsult;
 import com.planwise.service.WordCompletionService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -20,7 +21,7 @@ public class AutocompleteController {
      * Returns up to maxCount suggestions for the given prefix.
      */
     @GetMapping("/autocomplete")
-    public List<String> autocomplete(
+    public List<AutoCompleteRsult> autocomplete(
             @RequestParam("prefix") String prefix,
             @RequestParam(value = "max", defaultValue = "5") int maxCount) {
         return autoService.complete(prefix, maxCount);
