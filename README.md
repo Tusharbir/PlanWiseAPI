@@ -60,13 +60,13 @@
 * **Response** (200 OK):
 
   ```json
-  [
-    "rogers",
-    "router",
-    "room",
-    "roaming",
-    "300"
-  ]
+	[
+		{
+		   "word": "technology",
+                   "wordFrequency": 10,
+                   "searchFrequency": 6
+		}
+	]
   ```
 
 ---
