@@ -156,28 +156,38 @@ public class AVLTree {
      * Traverses the tree to find matching words with the prefix.
      * Only descends into subtrees that can contain matching prefixes.
      */
+
     private void collectMatches(Entry node, String prefix, List<AutoCompleteRsult> results, int limit) {
         if (node == null || results.size() >= limit) return;
 
-        // If node.term could be in left subtree
+        // Create the "end" of the prefix range for comparison
+        // For example, if prefix is "str", we want to find all words from "str" to "str" + maxChar
+        String prefixEnd = prefix + Character.MAX_VALUE;
+
+        // Only search left subtree if it could contain matches
+        // (if the current node's term is greater than or equal to our prefix)
         if (node.term.compareTo(prefix) >= 0) {
             collectMatches(node.leftLink, prefix, results, limit);
         }
 
-        // Add if it matches
-//        if (node.term.startsWith(prefix)) {
-//            results.add(node.term);
-//        }
+        // Stop if we've reached the limit
+        if (results.size() >= limit) return;
 
+        // Check if current node matches the prefix
         if (node.term.startsWith(prefix)) {
-            results.add(new AutoCompleteRsult(node.term, node.count,getSearchFrequency(node.term)));
+            results.add(new AutoCompleteRsult(node.term, node.count, getSearchFrequency(node.term)));
         }
 
-        // If node.term could be in right subtree
-        if (node.term.compareTo(prefix) <= 0) {
+        // Stop if we've reached the limit
+        if (results.size() >= limit) return;
+
+        // Only search right subtree if it could contain matches
+        // (if the current node's term is less than our prefix end range)
+        if (node.term.compareTo(prefixEnd) < 0) {
             collectMatches(node.rightLink, prefix, results, limit);
         }
     }
+
     private int getSearchFrequency(String term) {
         if (searchFreqService == null) {
             return 0; // Return 0 if service is not available
