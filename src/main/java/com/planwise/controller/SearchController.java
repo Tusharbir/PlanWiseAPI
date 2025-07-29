@@ -57,6 +57,8 @@ package com.planwise.controller;
 
 import com.planwise.model.Plan;
 import com.planwise.service.DataLoaderService;
+import com.planwise.service.SearchFrequencyService;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -70,9 +72,11 @@ import java.util.stream.Collectors;
 public class SearchController {
 
     private final DataLoaderService dataLoaderService;
+    private final SearchFrequencyService freqService;
 
-    public SearchController(DataLoaderService dataLoaderService) {
+    public SearchController(DataLoaderService dataLoaderService, SearchFrequencyService freqService) {
         this.dataLoaderService = dataLoaderService;
+        this.freqService = freqService;
     }
 
     /**
@@ -99,6 +103,10 @@ public class SearchController {
         }
 
         String lower = raw.toLowerCase();
+
+        // Increment frequency count for the keyword searched
+        freqService.incrementFrequency(lower);
+
 
         // 1) Exact site match?
         Set<String> sites = dataLoaderService.getAllSites();
