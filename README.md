@@ -108,7 +108,7 @@ Notes
 
 > **All data** is loaded from **`merged-csv.csv`** in `src/main/resources` at application startup.
 
-
+---
 ### 4. Website Crawler
 
 **URL:**
