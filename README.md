@@ -61,11 +61,11 @@
 
   ```json
 	[
-		{
-		   "word": "technology",
-                   "wordFrequency": 10,
-                   "searchFrequency": 6
-		}
+	{
+		"word": "technology",
+  		"wordFrequency": 10,
+  		"searchFrequency": 6
+	}
 	]
   ```
 
