@@ -128,11 +128,15 @@ public class DataLoaderService {
         return plans;
     }
 
+
+//function to return all available sites in csv
     public Set<String> getAllSites() {
         Set<String> sites = sitePlanMap.keySet();
         System.out.println("Available sites: " + sites);
         return sites;
     }
+
+//    function to return all plans for a site
     public List<Plan> getAllPlans() {
         return sitePlanMap.values().stream()
                 .flatMap(List::stream)
