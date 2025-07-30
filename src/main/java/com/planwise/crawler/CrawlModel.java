@@ -4,14 +4,14 @@ package com.planwise.crawler;
 import java.util.List;
 import java.util.ArrayList;
 
-public class CrawlResult {
+public class CrawlModel {
     private String url;
     private List<String> phoneNumbers;
     private List<String> emails;
     private List<String> links;
     private String error;
 
-    public CrawlResult() {
+    public CrawlModel() {
         this.phoneNumbers = new ArrayList<>();
         this.emails = new ArrayList<>();
         this.links = new ArrayList<>();
