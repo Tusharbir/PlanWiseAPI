@@ -41,8 +41,8 @@ public class Extractor {
                         ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)",  // handles quoted commas
                         -1
                 );
-                for (int i = 0; i < columns.length; i++) {
-                    System.out.println(columns[i]);
+                for (String column : columns) {
+                    System.out.println(column);
                 }
 
                 for (String field : columns) {
@@ -67,9 +67,5 @@ public class Extractor {
         return wordFrequency;
     }
 
-    /**
-     * Main method to test the vocabulary extraction from CSV.
-     * Displays the top 20 most frequent words.
-     */
 
 }
