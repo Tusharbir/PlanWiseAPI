@@ -19,10 +19,7 @@ public class CrawlerService {
 
     // Phone number patterns for different regions
     private final Pattern phonePattern = Pattern.compile(
-            "(?:\\+?\\d{1,4}[-\\s]?)?" +         // Optional country code
-                    "(?:\\(?\\d{2,5}\\)?[-\\s]?)?" +     // Optional area code (with or without brackets)
-                    "\\d{3,4}[-\\s]?\\d{3,4}",           // Main number part (can be split)
-            Pattern.CASE_INSENSITIVE
+            "^\\+(1|91|44|61)[ -]?(\\(\\d{3}\\)|\\d{3})[ -]?\\d{3}[ -]?\\d{4}$"
     );
 
     // Email pattern for various domains

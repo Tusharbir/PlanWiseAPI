@@ -5,7 +5,7 @@ public class SearchFrequency {
     private int count;
 
     public SearchFrequency(String keyword, int count) {
-        this.keyword = keyword;
+       this.keyword = keyword;
         this.count = count;
     }
 

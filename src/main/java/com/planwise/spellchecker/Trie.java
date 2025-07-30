@@ -30,26 +30,6 @@ public class Trie {
         node.isWordEnd = true;
     }
 
-    /**
-     * Checks if an exact word exists in the Trie.
-     * Follows the character path; returns true only if the final node
-     * is marked as a word end.
-     *
-     * @param word the lowercase string to search
-     * @return true if the word exists end-to-end in the Trie
-     */
-    public boolean contains(String word) {
-        TrieNode node = root;
-        for (char c : word.toCharArray()) {
-            node = node.children.get(c);
-            if (node == null) {
-                // Missing path for this character
-                return false;
-            }
-        }
-        // Word exists only if the final node is flagged
-        return node.isWordEnd;
-    }
 
     /**
      * Gathers all words in the Trie within a given maximum
