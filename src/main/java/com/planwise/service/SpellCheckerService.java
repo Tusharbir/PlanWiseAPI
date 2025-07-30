@@ -1,8 +1,10 @@
 package com.planwise.service;
 
-import com.planwise.autocomplete.Extractor;
+
 import com.planwise.spellchecker.SpellChecker;
 import com.planwise.spellchecker.Trie;
+import com.planwise.utilities.UtilFunc;
+
 import org.springframework.context.event.EventListener;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.stereotype.Service;
@@ -17,11 +19,8 @@ public class SpellCheckerService {
     private final Trie trie = new Trie();
 
     @EventListener(ApplicationReadyEvent.class)
-    public void loadVocabulary() {
-        System.out.println("Loading vocabulary...");
-        // 1) Pull every token from the merged CSV
-        Map<String,Integer> vocab = Extractor.extractVocabulary("merged-csv.csv");
-        // 2) Insert into your Trie
+    public void startUp(){
+        Map<String,Integer> vocab = UtilFunc.loadVocabulary();
         vocab.keySet().forEach(trie::insert);
     }
 

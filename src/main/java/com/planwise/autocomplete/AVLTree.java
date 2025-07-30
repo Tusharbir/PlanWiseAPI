@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class AVLTree {
 
-    private SearchFrequencyService searchFreqService;
+    private final SearchFrequencyService searchFreqService;
 
     // Constructor to inject the service
     public AVLTree(SearchFrequencyService searchFreqService) {
@@ -23,7 +23,7 @@ public class AVLTree {
     /**
      * Inner class representing a node in the AVL Tree.
      */
-    class Entry {
+    static class Entry {
         String term;          // Word stored in the node
         int count;            // Frequency of the word
         int depth;            // Height of the node
@@ -50,7 +50,7 @@ public class AVLTree {
     }
 
     /**
-     * Recursively inserts a word into the tree and rebalances it.
+     * Recursively inserts a word into the tree and rebalances it.i
      */
     private Entry place(Entry spot, String term, int count) {
         if (spot == null) return new Entry(term, count);
