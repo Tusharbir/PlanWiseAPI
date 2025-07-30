@@ -20,7 +20,7 @@ public class Extractor {
      */
     public static Map<String, Integer>  extractVocabulary(String fileName) {
         Map<String, Integer> wordFrequency = new HashMap<>();
-
+        //
         try {
             // Load the file from the classpath (resources folder)
             InputStream inputStream = Extractor.class.getClassLoader().getResourceAsStream(fileName);
