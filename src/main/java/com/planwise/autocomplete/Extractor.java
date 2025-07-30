@@ -14,10 +14,11 @@ public class Extractor {
 
     /**
      * Extracts vocabulary from the given CSV file located in resources folder.
+     *
      * @param fileName Name of the CSV file (must be in resources directory)
      * @return Map containing words as keys and their frequencies as values
      */
-    public static Map<String, Integer> extractVocabulary(String fileName) {
+    public static Map<String, Integer>  extractVocabulary(String fileName) {
         Map<String, Integer> wordFrequency = new HashMap<>();
 
         try {
