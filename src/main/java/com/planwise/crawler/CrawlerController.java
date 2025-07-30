@@ -13,11 +13,11 @@ public class CrawlerController {
     private CrawlerService crawlerService;
 
     @GetMapping("/crawl")
-    public CrawlResult crawlWebsite(@RequestParam String url) {
+    public CrawlModel crawlWebsite(@RequestParam String url) {
         try {
             return crawlerService.crawlWebsite(url);
         } catch (Exception e) {
-            CrawlResult errorResult = new CrawlResult();
+            CrawlModel errorResult = new CrawlModel();
             errorResult.setError("Failed to crawl website: " + e.getMessage());
             return errorResult;
         }
