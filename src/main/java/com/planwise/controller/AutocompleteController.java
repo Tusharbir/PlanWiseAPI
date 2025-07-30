@@ -3,6 +3,7 @@ package com.planwise.controller;
 import com.planwise.model.AutoCompleteRsult;
 import com.planwise.service.WordCompletionService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
