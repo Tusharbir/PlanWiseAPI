@@ -35,6 +35,16 @@ public class SearchFrequencyController {
         return res;
     }
 
+    @GetMapping("/get")
+    public Map<String, Object> get(@RequestParam String keyword) {
+        String normalized = keyword.toLowerCase();
+        int freq = freqService.getFrequency(normalized);
+        Map<String, Object> res = new HashMap<>();
+        res.put("keyword", normalized);
+        res.put("frequency", freq);
+        return res;
+    }
+
 
     @GetMapping("/count")
     public Map<String, Object> count(@RequestParam String keyword) {
@@ -55,7 +65,6 @@ public class SearchFrequencyController {
 
         String combined = allText.toString().toLowerCase();
         int occurrences = searchService.countOccurrences(combined, normalized);
-
 
         Map<String, Object> res = new HashMap<>();
         res.put("keyword", normalized);

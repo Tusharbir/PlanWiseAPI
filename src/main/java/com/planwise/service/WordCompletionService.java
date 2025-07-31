@@ -36,6 +36,7 @@ public class WordCompletionService {
     public void startUp() {
         Map<String,Integer> vocab = UtilFunc.loadVocabulary();
         vocab.forEach((token, freq) -> engine.push(token, freq));
+//        engine.explore();
     }
 
     /**
