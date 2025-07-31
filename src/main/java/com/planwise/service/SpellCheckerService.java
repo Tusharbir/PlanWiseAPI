@@ -15,7 +15,7 @@ import java.util.Map;
 @Service
 public class SpellCheckerService {
 
-    private final int maxDistance = 5;
+    private final int maxDistance = 3;
     private final Trie trie = new Trie();
 
     @EventListener(ApplicationReadyEvent.class)
@@ -30,7 +30,7 @@ public class SpellCheckerService {
     public List<String> suggest(String word, int maxCount) {
         if (word == null || word.isBlank()) return List.of();
         String w = word.trim().toLowerCase();
-        // maxDistance = 5 edits, maxSuggestions = maxCount
+        // maxDistance = 3 edits, maxSuggestions = maxCount
         return SpellChecker.suggest(w, maxDistance, maxCount, trie);
     }
 }
