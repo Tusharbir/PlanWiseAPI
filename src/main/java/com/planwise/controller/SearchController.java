@@ -87,7 +87,7 @@ public class SearchController {
      * - Otherwise, does free-text search across all Plan fields.
      */
     @GetMapping("/search")
-    public List<Plan> search(@RequestParam("q") String q) {
+    public List<Plan> search(@RequestParam("q") String q, @RequestParam( value = "increment", defaultValue = "true") boolean increment ) {
         if (q == null) {
             return Collections.emptyList();
         }
@@ -105,7 +105,9 @@ public class SearchController {
         String lower = raw.toLowerCase();
 
         // Increment frequency count for the keyword searched
-        freqService.incrementFrequency(lower);
+        if(increment){
+            freqService.incrementFrequency(lower);
+        }
 
 
         // 1) Exact site match?
