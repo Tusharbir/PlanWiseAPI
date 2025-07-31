@@ -30,4 +30,11 @@ public class CSVExposeController {
         System.out.println("Reading search_frequency csv from: " + path.toAbsolutePath());
         return Files.readAllLines(path);
     }
+
+    @GetMapping("/view-form-json")
+    public List<String> viewFromJson() throws IOException {
+        Path path = Paths.get("data/contact_messages.json");
+        System.out.println("Reading search_frequency csv from: " + path.toAbsolutePath());
+        return Files.readAllLines(path);
+    }
 }
