@@ -150,20 +150,25 @@ public class AVLTree {
     /**
      * Prints all stored words in alphabetical order.
      */
-//    public void printTree() {
-//        explore(top);
-//    }
+    public void explore() {
+        explore(top,"",true);
+    }
 
-//    /**perform in-order traversal.
+    /**perform in-order traversal.
+     */
+    private void explore(Entry node, String prefix, boolean isTail) {
+        if (node == null) return;
 
-//     */
-//    private void explore(Entry node) {
-//        if (node != null) {
-//            explore(node.leftLink);
-//            System.out.println(node.term + " (" + node.count + ")");
-//            explore(node.rightLink);
-//        }
-//    }
+        System.out.println(prefix + (isTail ? "└── " : "├── ") + node.term + " (" + node.count + ")");
+
+        List<Entry> children = new ArrayList<>();
+        if (node.leftLink != null) children.add(node.leftLink);
+        if (node.rightLink != null) children.add(node.rightLink);
+
+        for (int i = 0; i < children.size(); i++) {
+            explore(children.get(i), prefix + (isTail ? "    " : "│   "), i == children.size() - 1);
+        }
+    }
 
     /**
      * Returns a list of suggested words based on the input prefix.
@@ -186,6 +191,7 @@ public class AVLTree {
         // Create the "end" of the prefix range for comparison
         // For example, if prefix is "str", we want to find all words from "str" to "str" + maxChar
         String prefixEnd = prefix + Character.MAX_VALUE;
+        System.out.println("Collecting matches for " + Character.MAX_VALUE + "asda" + prefixEnd);
 
         // Only search left subtree if it could contain matches
         // (if the current node's term is greater than or equal to our prefix)
