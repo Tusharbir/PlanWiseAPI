@@ -26,6 +26,7 @@ public class DataLoaderService {
             String line; //row
             int lineCount = 0;
             int successCount = 0;
+            System.out.println("Loaded CSV from path: " + filePath);
 
             while ((line = br.readLine()) != null) {
                 lineCount++;
